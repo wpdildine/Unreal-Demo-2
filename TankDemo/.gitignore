@@ -3,6 +3,7 @@
 
 # Visual Studio 2015 user specific files
 .vs/
+/Content/ModularCliffs
 
 # Compiled Object files
 *.slo
