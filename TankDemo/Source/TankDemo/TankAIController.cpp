@@ -37,7 +37,6 @@ void ATankAIController::Tick(float DeltaTime)
 bool ATankAIController::AimTowardsPlayer() const
 {
 	GetAITankController()->AimAt(GetPlayerTank()->GetActorLocation());
-	//UE_LOG(LogTemp, Warning, TEXT(" is aiming at %s"), *GetPlayerTank()->GetTargetLocation());
 	return true;
 }
 
