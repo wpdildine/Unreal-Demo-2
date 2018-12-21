@@ -48,6 +48,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
 		auto Time = GetWorld()->GetTimeSeconds();
 		UE_LOG(LogTemp, Warning, TEXT("%f Time -- Aim found"), Time);
+		MoveBarrelTowards(AimDirection);
 	}
 	else
 	{
@@ -72,7 +73,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	UE_LOG(LogTemp, Warning, TEXT("Rotator: %s"), *AimAsRotator.ToString());
 
-	Barrel->Elevate(5);
+	Barrel->Elevate(DeltaRotator.Pitch);
 	//get static mesh
 	//get socket
 	//change barrel pitch around socket 
