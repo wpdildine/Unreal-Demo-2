@@ -1,7 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tank.h"
+#include "TankBarrel.h"
+#include "Projectile.h"
 #include "TankAimingComponent.h"
+
+class AProjectile;
 
 // Sets default values
 ATank::ATank()
@@ -45,6 +49,7 @@ void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	Barrel = BarrelToSet;
 
 }
 
@@ -52,5 +57,16 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 {
 
 	TankAimingComponent->SetTurretReference(TurretToSet);
+
+}
+
+void ATank::Fire()
+{
+	if (!Barrel) { return; }
+	//Spawn A Project at Socket location
+	auto SpawnLocation= Barrel->GetSocketLocation("Projectile");
+	auto SpawnRotation = Barrel->GetSocketRotation("Projectile");
+	UE_LOG(LogTemp, Warning, TEXT("Tank Fired %s / %s"), *SpawnLocation.ToString(), *SpawnRotation.ToString());
+	GetWorld()->SpawnActor<AProjectile>(SpawnLocation, SpawnRotation);
 
 }

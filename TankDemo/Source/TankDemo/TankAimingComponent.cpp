@@ -48,16 +48,9 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	{
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
 		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f Time -- Aim found"), Time);
 		MoveBarrelTowards(AimDirection);
 	}
-	else
-	{
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f Time -- Aim not found"), Time);
-	}
 	
-	//UE_LOG(LogTemp, Warning, TEXT("%s has barrel %s aiming at %s"), *OurTankName, *BarrelLocation.ToString(), *HitLocation.ToString());
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
@@ -77,17 +70,10 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-
-	
-
 	auto TurretRotator = Turret->GetForwardVector().Rotation();
-	//UE_LOG(LogTemp, Warning, TEXT("Turret Rotation: %s"), *AimAsRotator.ToString());
 
 	Barrel->Elevate(DeltaRotator.Pitch);
-
 	Turret->Rotate(DeltaRotator.Yaw);
-	//get static mesh
-	//get socket
-	//change barrel pitch around socket 
+
 }
 
