@@ -2,7 +2,7 @@
 
 #include "Tank.h"
 #include "TankBarrel.h"
-#include "Projectile.h"
+//#include "Projectile.h"
 #include "TankAimingComponent.h"
 
 class AProjectile;
@@ -67,6 +67,6 @@ void ATank::Fire()
 	auto SpawnLocation= Barrel->GetSocketLocation("Projectile");
 	auto SpawnRotation = Barrel->GetSocketRotation("Projectile");
 	UE_LOG(LogTemp, Warning, TEXT("Tank Fired %s / %s"), *SpawnLocation.ToString(), *SpawnRotation.ToString());
-	GetWorld()->SpawnActor<AProjectile>(SpawnLocation, SpawnRotation);
+	//GetWorld()->SpawnActor<AProjectile>(SpawnLocation, SpawnRotation);
 
 }

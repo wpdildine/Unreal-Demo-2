@@ -45,7 +45,7 @@ private:
 		float LaunchSpeed = 100000; //1000 m/s 
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
-		TSubclassOf<AProjectile> ProjectileBlueprint;
+		//TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	//Local Barrel Reference
 	UTankBarrel * Barrel = nullptr; 
