@@ -34,13 +34,13 @@ private:
 
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
 
-		UPROPERTY(EditAnywhere)
+		UPROPERTY(EditDefaultsOnly)
 			float CrossHairX = 0.5;
 
-		UPROPERTY(EditAnywhere)
+		UPROPERTY(EditDefaultsOnly)
 			float CrossHairY = .33;
 
-		UPROPERTY(EditAnywhere)
+		UPROPERTY(EditDefaultsOnly)
 			float LineTraceRange = 1000000;
 
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;

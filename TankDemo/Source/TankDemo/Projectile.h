@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
+class UProjectileMovementComponent;
+
 UCLASS()
 class TANKDEMO_API AProjectile : public AActor
 {
@@ -18,9 +20,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	UProjectileMovementComponent * ProjectileMovement = nullptr;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	void LaunchProjectile(float LaunchSpeed);
 };
