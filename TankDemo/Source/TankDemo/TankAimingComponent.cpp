@@ -2,13 +2,14 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;// TODO: Should this tick
+	PrimaryComponentTick.bCanEverTick = false;// TODO: Should this tick
 
 	// ...
 }
@@ -64,6 +65,12 @@ void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 	Barrel = BarrelToSet;
 }
 
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+	Turret = TurretToSet;
+}
+
+
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	
@@ -71,9 +78,14 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
-	UE_LOG(LogTemp, Warning, TEXT("Rotator: %s"), *AimAsRotator.ToString());
+	
+
+	auto TurretRotator = Turret->GetForwardVector().Rotation();
+	//UE_LOG(LogTemp, Warning, TEXT("Turret Rotation: %s"), *AimAsRotator.ToString());
 
 	Barrel->Elevate(DeltaRotator.Pitch);
+
+	Turret->Rotate(DeltaRotator.Yaw);
 	//get static mesh
 	//get socket
 	//change barrel pitch around socket 
