@@ -21,6 +21,6 @@ public:
 
 	//Max Force
 	UPROPERTY(EditDefaultsOnly)
-		float TrackMaxDrivingForce = 400000; //40 ton tank
+		float TrackMaxDrivingForce = 40000000; //40 ton tank
 	
 };
