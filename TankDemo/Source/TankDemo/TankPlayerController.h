@@ -19,7 +19,6 @@ class TANKDEMO_API ATankPlayerController : public APlayerController
 
 public:
 
-	ATank * GetControlledTank() const;
 
 	virtual void BeginPlay() override;
 
@@ -29,6 +28,9 @@ public:
 
 	FVector HitLocation;
 
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		ATank * GetControlledTank() const;
 
 private:
 
