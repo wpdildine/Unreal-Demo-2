@@ -21,16 +21,11 @@ public:
 	// Sets default values for this pawn's properties
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetBarrelReference(UTankBarrel * BarrelToSet);
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetTurretReference(UTankTurret * TurretToSet);
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 protected:
 	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly)
 		UTankAimingComponent * TankAimingComponent = nullptr;
@@ -41,6 +36,7 @@ protected:
 private:	
 	ATank();
 
+	virtual void BeginPlay() override;
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -58,6 +54,5 @@ private:
 
 	double LastFireTime = 0;
 
-	//Local Barrel Reference
-	UTankBarrel * Barrel = nullptr; 
+
 };

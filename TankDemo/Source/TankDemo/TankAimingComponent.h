@@ -29,15 +29,16 @@ class TANKDEMO_API UTankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-	void SetTurretReference(UTankTurret* TurretToSet);
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void AimAt(FVector WorldSpaceAim, float LaunchSpeed);
 
-	
+	UTankBarrel * Barrel = nullptr;
 
 protected:
 	// Called when the game starts
@@ -46,8 +47,8 @@ protected:
 		EFiringState FiringState = EFiringState::Reloading;
 
 private:
-	UTankBarrel * Barrel;
-	UTankTurret * Turret;
+	
+	UTankTurret * Turret = nullptr;
 	void MoveBarrelTowards(FVector AimDirection);
 
 
