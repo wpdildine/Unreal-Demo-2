@@ -10,7 +10,7 @@ class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
 class AProjectile;
-class UTankMovementComponent;
+
 
 UCLASS()
 class TANKDEMO_API ATank : public APawn
@@ -26,17 +26,16 @@ public:
 	void Fire();
 protected:
 	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly)
 		UTankAimingComponent * TankAimingComponent = nullptr;
 
-	UPROPERTY(BlueprintReadOnly)
-		UTankMovementComponent * TankMovementComponent = nullptr;
+
 
 private:	
 	ATank();
 
-	virtual void BeginPlay() override;
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
