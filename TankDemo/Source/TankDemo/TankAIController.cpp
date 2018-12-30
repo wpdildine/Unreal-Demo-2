@@ -3,7 +3,6 @@
 
 #include "TankAIController.h"
 #include "TankAimingComponent.h"
-#include "Tank.h"
 
 //Depends on Movement component via pathfinding.
 void ATankAIController::BeginPlay()
@@ -16,8 +15,8 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	auto ControlledTank = Cast<ATank>(GetPawn());
+	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 
 	if (ensure(PlayerTank))
 	{
@@ -25,7 +24,7 @@ void ATankAIController::Tick(float DeltaTime)
 		MoveToActor(PlayerTank, AcceptanceRadius); // TODO check radius is in cm
 
 		// Aim towards the player
-		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+		AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
 		//ControlledTank->Fire(); // TODO limit firing rate
 	}

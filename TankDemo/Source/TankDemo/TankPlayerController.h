@@ -9,7 +9,7 @@
 /**
  * 
  */
-class ATank;
+
 class UTankAimingComponent;
 
 UCLASS()
@@ -21,8 +21,7 @@ class TANKDEMO_API ATankPlayerController : public APlayerController
 public:
 
 	FVector HitLocation;
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-		ATank * GetControlledTank() const;
+
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 		void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
