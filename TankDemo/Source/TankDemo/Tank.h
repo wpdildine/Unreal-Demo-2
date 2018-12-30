@@ -19,9 +19,6 @@ public:
 	// Sets default values for this pawn's properties
 	void AimAt(FVector HitLocation);
 
-
-	UFUNCTION(BlueprintCallable)
-	void Fire();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -35,13 +32,6 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, Category = "Setup")
-		TSubclassOf<AProjectile> ProjectileBlueprint;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float ReloadTimeInSeconds = 3.0;
-
-	double LastFireTime = 0;
 
 
 };

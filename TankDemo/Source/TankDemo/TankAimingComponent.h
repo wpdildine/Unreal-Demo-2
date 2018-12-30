@@ -10,6 +10,7 @@
 
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
 UENUM()
 enum class EFiringState : uint8
@@ -38,6 +39,8 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void AimAt(FVector WorldSpaceAim);
+	UFUNCTION(BlueprintCallable)
+		void Fire();
 
 
 protected:
@@ -47,11 +50,21 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 		EFiringState FiringState = EFiringState::Reloading;
 
+
 private:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 100000;
+		float LaunchSpeed = 3000;
 	void MoveBarrelTowards(FVector AimDirection);
 
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float ReloadTimeInSeconds = 3.0;
+
+	double LastFireTime = 0;
+
+	
 
 };
