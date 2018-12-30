@@ -33,9 +33,11 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	// ...
 }
 
-void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret * TurretToSet)
+void UTankAimingComponent::InitializeAim(UTankBarrel* BarrelToSet, UTankTurret * TurretToSet)
 {
+	
 	if (!ensure(BarrelToSet && TurretToSet)) { return; }
+	UE_LOG(LogTemp, Warning, TEXT("H"))
 	Barrel = BarrelToSet;
 	Turret = TurretToSet;
 }
@@ -43,25 +45,31 @@ void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret * Tu
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	
-	if (!ensure(Barrel && Turret)) { return; }
-	FVector OutLaunchVelocity(0);
+
+
+	if (!ensure(Barrel) || !ensure(Turret)) { return; }
+	UE_LOG(LogTemp, Warning, TEXT("something missing turret"))
+
+
+
+
+		FVector OutLaunchVelocity(0);
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-	
+
 	auto OurTankName = GetOwner()->GetName();
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, StartLocation, HitLocation, LaunchSpeed, false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace);
-	if (bHaveAimSolution) 
+	if (bHaveAimSolution)
 	{
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
-		auto Time = GetWorld()->GetTimeSeconds();
 		MoveBarrelTowards(AimDirection);
 	}
-	
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
+	
 	if(!ensure(Barrel && Turret)) { return; }
+	
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
@@ -69,7 +77,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	Barrel->Elevate(DeltaRotator.Pitch);
 	Turret->Rotate(DeltaRotator.Yaw);
-
 }
 
 

@@ -30,25 +30,26 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
-
+	void InitializeAim(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+	UTankBarrel * Barrel = nullptr;
+	UTankTurret * Turret = nullptr;
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void AimAt(FVector WorldSpaceAim, float LaunchSpeed);
 
-	UTankBarrel * Barrel = nullptr;
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 		EFiringState FiringState = EFiringState::Reloading;
 
 private:
 	
-	UTankTurret * Turret = nullptr;
+
 	void MoveBarrelTowards(FVector AimDirection);
 
 

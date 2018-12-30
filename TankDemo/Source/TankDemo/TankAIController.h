@@ -20,5 +20,5 @@ public:
 
 
 private:
-	float AcceptanceRadius = 3000;
+	float AcceptanceRadius = 300;
 };
