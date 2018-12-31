@@ -100,8 +100,6 @@ void UTankAimingComponent::Fire()
 		UE_LOG(LogTemp, Warning, TEXT("barrel"))
 		return;
 	}
-	UE_LOG(LogTemp, Warning, TEXT("FIRING"))
-	
 
 
 	if (FiringState != EFiringState::Reloading)
