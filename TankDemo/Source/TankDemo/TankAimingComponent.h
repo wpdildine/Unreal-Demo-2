@@ -17,7 +17,8 @@ enum class EFiringState : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	Empty
 
 };
 
@@ -42,7 +43,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void Fire();
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+		int GetRoundsLeft() const;
+
 	EFiringState GetFiringState() const;
+
 
 protected:
 	// Called when the game starts
@@ -50,7 +55,7 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 		EFiringState FiringState = EFiringState::Reloading;
-
+	int Ammo = 3;
 
 private:
 	
