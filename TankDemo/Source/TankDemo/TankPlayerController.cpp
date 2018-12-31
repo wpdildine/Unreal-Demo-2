@@ -32,7 +32,9 @@ void ATankPlayerController::AimTowardsCrossHair()
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	FVector HitLocation;
 	if (!ensure(GetPawn())){return;}
-	if (GetSightRayHitLocation(HitLocation)) 
+
+	bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
+	if (bGotHitLocation) // Has "side-effect", is going to line trace
 	{
 		AimingComponent->AimAt(HitLocation);
 		//UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
@@ -57,10 +59,10 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const {
 		
 		if (GetLookDirection(ScreenLocation, LookDirection))
 		{
-			GetLookVectorHitLocation(LookDirection, HitLocation);
+			return GetLookVectorHitLocation(LookDirection, HitLocation);
 		}
 
-		return true;
+		return false;
 
 }
 
