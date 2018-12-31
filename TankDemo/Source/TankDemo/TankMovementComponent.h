@@ -18,17 +18,19 @@ class TANKDEMO_API UTankMovementComponent : public UNavMovementComponent
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
-		void Initialize(UTankTrack* LeftTrackToSet, UTankTrack * RightTrackToSet);
+		void Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
+
 	UFUNCTION(BlueprintCallable, Category = "Input")
 		void IntendMoveForward(float Throw);
+
 	UFUNCTION(BlueprintCallable, Category = "Input")
 		void IntendTurnRight(float Throw);
-	
-	
-private:
 
-	UTankTrack * LeftTrack = nullptr;
-	UTankTrack * RightTrack = nullptr;
+private:
+	// Called from the pathfinding logic by the AI controllers
 	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
+	UTankTrack* LeftTrack = nullptr;
+	UTankTrack* RightTrack = nullptr;
 };
+
