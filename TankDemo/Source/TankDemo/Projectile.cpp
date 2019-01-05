@@ -7,6 +7,8 @@
 #include "Engine/Classes/Components/StaticMeshComponent.h"
 #include "Engine/Classes/PhysicsEngine/RadialForceComponent.h"
 #include "Engine/World.h"
+#include "Engine/Classes/Kismet/GameplayStatics.h"
+#include "Engine/Classes/GameFramework/DamageType.h"
 
 
 class UProjectileMovementComponent;
@@ -71,7 +73,10 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	CollisionMesh->DestroyComponent();
 	FTimerHandle Timer;
 	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyDelay, false);
+	UGameplayStatics::ApplyRadialDamage(this, ProjectileDamage, GetActorLocation(), ExplosionForce->Radius, UDamageType::StaticClass(), TArray<AActor*>());
+
 }
+
 void AProjectile::OnTimerExpire() {
 	Destroy();
 }

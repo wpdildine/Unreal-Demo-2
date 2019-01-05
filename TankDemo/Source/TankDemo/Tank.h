@@ -18,10 +18,12 @@ class TANKDEMO_API ATank : public APawn
 public:
 	// Sets default values for this pawn's properties
 	void AimAt(FVector HitLocation);
-
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetHealthPercent() const;
 
 private:	
 	ATank();
@@ -32,6 +34,10 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	int32 StartingHealth = 100;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Health")
+	int32 CurrentHealth = StartingHealth;
 
 };
