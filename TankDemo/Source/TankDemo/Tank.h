@@ -10,6 +10,8 @@ class UTankBarrel;
 class AProjectile;
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
+
 UCLASS()
 class TANKDEMO_API ATank : public APawn
 {
@@ -19,6 +21,8 @@ public:
 	// Sets default values for this pawn's properties
 	void AimAt(FVector HitLocation);
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
+	FTankDelegate OnDeath;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
